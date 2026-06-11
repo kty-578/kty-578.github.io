@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>KTY578 Blog</title><link>https://kty-578.github.io/</link><description>Recent content on KTY578 Blog</description><generator>Hugo</generator><language>en</language><lastBuildDate>Tue, 09 Jun 2026 12:34:03 +0800</lastBuildDate><atom:link href="https://kty-578.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello World</title><link>https://kty-578.github.io/posts/hello-world/</link><pubDate>Tue, 09 Jun 2026 12:34:03 +0800</pubDate><guid>https://kty-578.github.io/posts/hello-world/</guid><description>&lt;hr&gt;
+&lt;h2 id="欢迎来到我的博客"&gt;欢迎来到我的博客！&lt;/h2&gt;
+&lt;p&gt;这是我的第一篇博客文章。🎉&lt;/p&gt;
+&lt;h3 id="代码示例"&gt;代码示例&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(&lt;span style="color:#e6db74"&gt;&amp;#34;Hello, Hugo!&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>
