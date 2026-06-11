@@ -1,0 +1,44 @@
+baseURL: "https://kty-578.github.io/"
+title: "KTY578 Blog"
+theme: "PaperMod"
+
+params:
+  author: "KTY578"
+  description: "Here I am"
+  
+  # 社交图标显示位置
+  ShowShareButtons: true  # 显示分享按钮
+  ShowReadingTime: true   # 显示阅读时间
+  ShowPostNavLinks: true  # 显示文章导航
+  
+  # 主页信息
+  homeInfoParams:
+    Title: "Welcome to My Blog"
+    Content: "这里是我分享想法和记录学习的地方"
+  
+  # 社交图标（会显示在侧边栏或页脚）
+  socialIcons:
+    - name: "github"
+      url: "https://github.com/kty-578"
+    - name: "bilibili"
+      url: "https://space.bilibili.com/141562657"
+
+menu:
+  main:
+    - name: "首页"
+      url: "/"
+      weight: 1
+    - name: "文章"
+      url: "/posts/"
+      weight: 2
+    - name: "搜索"
+      url: "/search/"
+      weight: 3
+    - name: "归档"
+      url: "/archives/"
+      weight: 4
+
+taxonomies:
+  category: "categories"
+  tag: "tags"
+  series: "series"
