@@ -7,7 +7,7 @@ params:
   description: "Here I am"
   
   # 社交图标显示位置
-  ShowShareButtons: true  # 显示分享按钮
+  ShowShareButtons: false  # 显示分享按钮
   ShowReadingTime: true   # 显示阅读时间
   ShowPostNavLinks: true  # 显示文章导航
   
