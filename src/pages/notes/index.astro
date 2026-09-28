@@ -8,10 +8,10 @@ const entries = await getPublishedNotes();
 
 <BaseLayout title="随笔" titleEn="Notes" description="KTY578 的阅读、研究与日常随笔。" descriptionEn="Notes on reading, research, and everyday life by KTY578.">
   <main id="main-content" class="shell listing-page">
-    <header class="listing-header">
+    <header class="page-intro">
       <p class="eyebrow"><LocalizedText zh="02 / 随笔" en="02 / Notebook" /></p>
       <h1><LocalizedText zh="随笔" en="Notes" /></h1>
-      <p><LocalizedText zh="阅读、研究与日常记录。" en="Reading, research, and everyday observations." /></p>
+      <p class="page-intro__description"><LocalizedText zh="阅读、研究与日常记录。" en="Reading, research, and everyday observations." /></p>
     </header>
     {entries.length > 0 ? (
       <ol class="listing-list">

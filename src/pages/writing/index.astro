@@ -8,10 +8,10 @@ const entries = await getPublishedWriting();
 
 <BaseLayout title="文章" titleEn="Writing" description="KTY578 的文章与长文。" descriptionEn="Articles and essays by KTY578.">
   <main id="main-content" class="shell listing-page">
-    <header class="listing-header">
+    <header class="page-intro">
       <p class="eyebrow"><LocalizedText zh="01 / 文章" en="01 / Essays" /></p>
       <h1><LocalizedText zh="文章" en="Writing" /></h1>
-      <p><LocalizedText zh="经过整理的文章与长文。" en="Essays and longer pieces, gathered here." /></p>
+      <p class="page-intro__description"><LocalizedText zh="经过整理的文章与长文。" en="Essays and longer pieces, gathered here." /></p>
     </header>
     {entries.length > 0 ? (
       <ol class="listing-list">
