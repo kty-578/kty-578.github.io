@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectEntry from '../components/ProjectEntry.astro';
+import { dateValue, formatDate, getPublishedNotes, getPublishedProjects, getPublishedWriting } from '../lib/content';
+
+const [writing, notes, projects] = await Promise.all([
+  getPublishedWriting(),
+  getPublishedNotes(),
+  getPublishedProjects(),
+]);
+---
+
+<BaseLayout title="KTY578" description="KTY578 的个人网站，记录写作、阅读、研究与项目。">
+  <main id="main-content" class="shell home">
+    <section class="home-intro" aria-labelledby="home-title">
+      <p class="eyebrow" lang="en">A personal place for thought and making</p>
+      <h1 id="home-title">写作、阅读、研究。</h1>
+      <p class="home-intro__description">这里收藏随笔、笔记与项目。文字可以慢慢写，想法也可以慢慢生长。</p>
+    </section>
+
+    <div class="home-grid">
+      <section class="home-section" aria-labelledby="writing-heading">
+        <div class="section-heading">
+          <div><span class="section-number">01</span><h2 id="writing-heading" lang="en">Writing</h2></div>
+          <a href="/writing/" aria-label="查看全部 Writing">全部 <span aria-hidden="true">↗</span></a>
+        </div>
+        {writing.length > 0 ? (
+          <ol class="entry-list">
+            {writing.slice(0, 4).map((entry) => (
+              <li><a href={`/writing/${entry.id}/`}><span>{entry.data.title}</span><time datetime={dateValue(entry.data.date)}>{formatDate(entry.data.date, entry.data.lang)}</time></a></li>
+            ))}
+          </ol>
+        ) : <p class="empty-state">文章即将从这里开始。</p>}
+      </section>
+
+      <section class="home-section" aria-labelledby="notes-heading">
+        <div class="section-heading">
+          <div><span class="section-number">02</span><h2 id="notes-heading" lang="en">Notes</h2></div>
+          <a href="/notes/" aria-label="查看全部 Notes">全部 <span aria-hidden="true">↗</span></a>
+        </div>
+        {notes.length > 0 ? (
+          <ol class="entry-list">
+            {notes.slice(0, 4).map((entry) => (
+              <li><a href={`/notes/${entry.id}/`}><span>{entry.data.title}</span><time datetime={dateValue(entry.data.date)}>{formatDate(entry.data.date, entry.data.lang)}</time></a></li>
+            ))}
+          </ol>
+        ) : <p class="empty-state">笔记即将从这里开始。</p>}
+      </section>
+    </div>
+
+    <section class="home-section home-projects" aria-labelledby="projects-heading">
+      <div class="section-heading">
+        <div><span class="section-number">03</span><h2 id="projects-heading" lang="en">Projects</h2></div>
+        <a href="/projects/" aria-label="查看全部 Projects">全部 <span aria-hidden="true">↗</span></a>
+      </div>
+      {projects.length > 0 ? projects.map((project) => <ProjectEntry project={project} />) : <p class="empty-state">项目即将从这里开始。</p>}
+    </section>
+
+    <div class="home-outro"><span aria-hidden="true">§</span><a href="/about/">关于这处空间 <span aria-hidden="true">↗</span></a></div>
+  </main>
+</BaseLayout>

@@ -1,0 +1,37 @@
+:root {
+  color-scheme: light;
+  --bg: #f7f5ef;
+  --surface: #fbfaf7;
+  --text: #2d2a26;
+  --muted: #625d56;
+  --border: #ded9d1;
+  --accent: #8c4f37;
+  --accent-wash: #eee4db;
+  --font-reading-zh: "I.Ming", "Songti SC", "Source Han Serif SC", "Noto Serif CJK SC", "SimSun", serif;
+  --font-reading-en: "Lora Variable", "Iowan Old Style", Georgia, serif;
+  --font-ui: Inter, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #24211e;
+    --surface: #2c2824;
+    --text: #eee9e1;
+    --muted: #bbb0a3;
+    --border: #514b44;
+    --accent: #e0a78b;
+    --accent-wash: #392f2a;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #24211e;
+  --surface: #2c2824;
+  --text: #eee9e1;
+  --muted: #bbb0a3;
+  --border: #514b44;
+  --accent: #e0a78b;
+  --accent-wash: #392f2a;
+}

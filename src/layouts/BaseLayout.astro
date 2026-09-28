@@ -1,0 +1,72 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '@fontsource-variable/lora/wght.css';
+import '../styles/tokens.css';
+import '../styles/global.css';
+import '../styles/typography.css';
+import '../styles/article.css';
+
+interface Props {
+  title: string;
+  description: string;
+  lang?: 'zh-CN' | 'en';
+  type?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const { title, description, lang = 'zh-CN', type = 'website', noindex = false } = Astro.props;
+const pathname = Astro.url.pathname === '/' ? '/' : `${Astro.url.pathname.replace(/\/+$/, '')}/`;
+const canonical = new URL(pathname, Astro.site);
+const pageTitle = title === 'KTY578' ? title : `${title} · KTY578`;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f5ef" />
+    {noindex && <meta name="robots" content="noindex" />}
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    {!noindex && <link rel="canonical" href={canonical.href} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title="KTY578 RSS" href={new URL('/rss.xml', Astro.site).href} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <script is:inline>
+      try {
+        const savedTheme = localStorage.getItem('kty578-theme');
+        if (savedTheme === 'light' || savedTheme === 'dark') {
+          document.documentElement.dataset.theme = savedTheme;
+        }
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content" lang="zh-CN">跳至正文</a>
+    <Header />
+    <slot />
+    <Footer />
+    <script is:inline>
+      const button = document.getElementById('theme-toggle');
+      const media = window.matchMedia('(prefers-color-scheme: dark)');
+      const isDark = () => document.documentElement.dataset.theme === 'dark' ||
+        (!document.documentElement.dataset.theme && media.matches);
+      const updateButton = () => {
+        if (button) button.setAttribute('aria-pressed', String(isDark()));
+      };
+      updateButton();
+      media.addEventListener('change', updateButton);
+      button?.addEventListener('click', () => {
+        const next = isDark() ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        try { localStorage.setItem('kty578-theme', next); } catch {}
+        updateButton();
+      });
+    </script>
+  </body>
+</html>

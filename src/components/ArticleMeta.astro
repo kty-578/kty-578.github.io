@@ -1,0 +1,16 @@
+---
+import { dateValue, formatDate } from '../lib/content';
+
+interface Props {
+  date: Date;
+  updatedDate?: Date;
+  lang: 'zh-CN' | 'en';
+}
+
+const { date, updatedDate, lang } = Astro.props;
+---
+
+<div class="article-meta">
+  <time datetime={dateValue(date)}>{formatDate(date, lang)}</time>
+  {updatedDate && <span class="article-meta__updated">{lang === 'zh-CN' ? '更新于' : 'Updated'} <time datetime={dateValue(updatedDate)}>{formatDate(updatedDate, lang)}</time></span>}
+</div>

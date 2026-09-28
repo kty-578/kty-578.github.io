@@ -1,0 +1,22 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  headingLevel?: 2 | 3;
+}
+
+const { project, headingLevel = 3 } = Astro.props;
+---
+
+<article class="project-entry">
+  <div class="project-entry__main">
+    {headingLevel === 2 ? (
+      <h2><a href={`/projects/${project.id}/`}>{project.data.title}<span aria-hidden="true"> ↗</span></a></h2>
+    ) : (
+      <h3><a href={`/projects/${project.id}/`}>{project.data.title}<span aria-hidden="true"> ↗</span></a></h3>
+    )}
+    <p>{project.data.description}</p>
+  </div>
+  <span class="project-entry__period">{project.data.period}</span>
+</article>

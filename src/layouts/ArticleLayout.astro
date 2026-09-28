@@ -1,0 +1,35 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ArticleMeta from '../components/ArticleMeta.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  section: 'Writing' | 'Notes' | 'Projects';
+  lang: 'zh-CN' | 'en';
+  date?: Date;
+  updatedDate?: Date;
+  period?: string;
+}
+
+const { title, description, section, lang, date, updatedDate, period } = Astro.props;
+const sectionHref = `/${section.toLowerCase()}/`;
+---
+
+<BaseLayout title={title} description={description} lang={lang} type="article">
+  <main id="main-content" class="shell article-shell">
+    <article class="article">
+      <header class="article-header">
+        <a class="eyebrow eyebrow-link" href={sectionHref} lang="en">{section} <span aria-hidden="true">↗</span></a>
+        <h1>{title}</h1>
+        {date && <ArticleMeta date={date} updatedDate={updatedDate} lang={lang} />}
+        {period && <p class="article-meta">{period}</p>}
+      </header>
+      <div class="prose"><slot /></div>
+      <footer class="article-end">
+        <span aria-hidden="true">⁂</span>
+        <a href={sectionHref}>{lang === 'zh-CN' ? '返回列表' : 'Back to list'}</a>
+      </footer>
+    </article>
+  </main>
+</BaseLayout>

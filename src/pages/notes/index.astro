@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { dateValue, formatDate, getPublishedNotes } from '../../lib/content';
+
+const entries = await getPublishedNotes();
+---
+
+<BaseLayout title="Notes" description="KTY578 的阅读、研究与日常笔记。">
+  <main id="main-content" class="shell listing-page">
+    <header class="listing-header">
+      <p class="eyebrow">02 / Notebook</p>
+      <h1 lang="en">Notes</h1>
+      <p>阅读、研究与日常记录。</p>
+    </header>
+    {entries.length > 0 ? (
+      <ol class="listing-list">
+        {entries.map((entry) => (
+          <li>
+            <article>
+              <div><h2><a href={`/notes/${entry.id}/`}>{entry.data.title}</a></h2><p>{entry.data.description}</p></div>
+              <time datetime={dateValue(entry.data.date)}>{formatDate(entry.data.date, entry.data.lang)}</time>
+            </article>
+          </li>
+        ))}
+      </ol>
+    ) : <p class="empty-state empty-state--large">笔记即将从这里开始。</p>}
+  </main>
+</BaseLayout>

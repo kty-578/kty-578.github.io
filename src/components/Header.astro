@@ -1,0 +1,21 @@
+---
+const pathname = Astro.url.pathname;
+const links = [
+  { href: '/writing/', label: 'Writing' },
+  { href: '/notes/', label: 'Notes' },
+  { href: '/projects/', label: 'Projects' },
+  { href: '/about/', label: 'About' },
+];
+---
+
+<header class="site-header">
+  <div class="site-header__inner shell">
+    <a class="brand" href="/" aria-label="KTY578 首页">KTY578</a>
+    <nav class="main-nav" aria-label="主要导航">
+      {links.map(({ href, label }) => (
+        <a href={href} class:list={{ 'is-current': pathname.startsWith(href) }} aria-current={pathname === href ? 'page' : pathname.startsWith(href) ? 'location' : undefined} lang="en">{label}</a>
+      ))}
+    </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" lang="zh-CN">深色模式</button>
+  </div>
+</header>
