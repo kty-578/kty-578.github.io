@@ -1,28 +1,29 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import LocalizedText from '../../components/LocalizedText.astro';
 import { dateValue, formatDate, getPublishedWriting } from '../../lib/content';
 
 const entries = await getPublishedWriting();
 ---
 
-<BaseLayout title="Writing" description="KTY578 的随笔与长文。">
+<BaseLayout title="文章" titleEn="Writing" description="KTY578 的文章与长文。" descriptionEn="Articles and essays by KTY578.">
   <main id="main-content" class="shell listing-page">
     <header class="listing-header">
-      <p class="eyebrow">01 / Essays</p>
-      <h1 lang="en">Writing</h1>
-      <p>经过整理的随笔与长文。</p>
+      <p class="eyebrow"><LocalizedText zh="01 / 文章" en="01 / Essays" /></p>
+      <h1><LocalizedText zh="文章" en="Writing" /></h1>
+      <p><LocalizedText zh="经过整理的文章与长文。" en="Essays and longer pieces, gathered here." /></p>
     </header>
     {entries.length > 0 ? (
       <ol class="listing-list">
         {entries.map((entry) => (
           <li>
             <article>
-              <div><h2><a href={`/writing/${entry.id}/`}>{entry.data.title}</a></h2><p>{entry.data.description}</p></div>
-              <time datetime={dateValue(entry.data.date)}>{formatDate(entry.data.date, entry.data.lang)}</time>
+              <div lang={entry.data.lang}><h2><a href={`/writing/${entry.id}/`}>{entry.data.title}</a></h2><p>{entry.data.description}</p></div>
+              <time datetime={dateValue(entry.data.date)}><LocalizedText zh={formatDate(entry.data.date, 'zh-CN')} en={formatDate(entry.data.date, 'en')} /></time>
             </article>
           </li>
         ))}
       </ol>
-    ) : <p class="empty-state empty-state--large">文章即将从这里开始。</p>}
+    ) : <p class="empty-state empty-state--large"><LocalizedText zh="文章即将从这里开始。" en="Articles will appear here soon." /></p>}
   </main>
 </BaseLayout>

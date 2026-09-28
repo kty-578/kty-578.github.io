@@ -19,8 +19,8 @@ export async function GET(context: { site: URL | undefined }) {
   ].sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
 
   return rss({
-    title: 'KTY578 · Writing & Notes',
-    description: 'KTY578 的随笔、阅读与研究笔记。',
+    title: 'KTY578 · 文章与随笔',
+    description: 'KTY578 的文章、随笔与研究记录。',
     site: context.site ?? new URL('https://kty578.com'),
     items,
     customData: '<language>zh-CN</language>',

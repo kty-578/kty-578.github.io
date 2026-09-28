@@ -1,7 +1,9 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import '@fontsource-variable/lora/wght.css';
+import LocalizedText from '../components/LocalizedText.astro';
+import loraLatinFontUrl from '@fontsource-variable/lora/files/lora-latin-wght-normal.woff2?url';
+import '../styles/fonts.css';
 import '../styles/tokens.css';
 import '../styles/global.css';
 import '../styles/typography.css';
@@ -9,16 +11,19 @@ import '../styles/article.css';
 
 interface Props {
   title: string;
+  titleEn?: string;
   description: string;
+  descriptionEn?: string;
   lang?: 'zh-CN' | 'en';
   type?: 'website' | 'article';
   noindex?: boolean;
 }
 
-const { title, description, lang = 'zh-CN', type = 'website', noindex = false } = Astro.props;
+const { title, titleEn = title, description, descriptionEn = description, lang = 'zh-CN', type = 'website', noindex = false } = Astro.props;
 const pathname = Astro.url.pathname === '/' ? '/' : `${Astro.url.pathname.replace(/\/+$/, '')}/`;
 const canonical = new URL(pathname, Astro.site);
 const pageTitle = title === 'KTY578' ? title : `${title} · KTY578`;
+const pageTitleEn = titleEn === 'KTY578' ? titleEn : `${titleEn} · KTY578`;
 ---
 
 <!doctype html>
@@ -28,16 +33,23 @@ const pageTitle = title === 'KTY578' ? title : `${title} · KTY578`;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f7f5ef" />
     {noindex && <meta name="robots" content="noindex" />}
-    <title>{pageTitle}</title>
-    <meta name="description" content={description} />
+    <title data-zh={pageTitle} data-en={pageTitleEn}>{pageTitle}</title>
+    <meta name="description" content={description} data-zh={description} data-en={descriptionEn} />
     {!noindex && <link rel="canonical" href={canonical.href} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href={loraLatinFontUrl} as="font" type="font/woff2" crossorigin />
     <link rel="alternate" type="application/rss+xml" title="KTY578 RSS" href={new URL('/rss.xml', Astro.site).href} />
     <meta property="og:type" content={type} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical.href} />
     <script is:inline>
+      try {
+        if (localStorage.getItem('kty578-language') === 'en') {
+          document.documentElement.dataset.siteLang = 'en';
+          document.documentElement.lang = 'en';
+        }
+      } catch {}
       try {
         const savedTheme = localStorage.getItem('kty578-theme');
         if (savedTheme === 'light' || savedTheme === 'dark') {
@@ -47,11 +59,33 @@ const pageTitle = title === 'KTY578' ? title : `${title} · KTY578`;
     </script>
   </head>
   <body>
-    <a class="skip-link" href="#main-content" lang="zh-CN">跳至正文</a>
+    <a class="skip-link" href="#main-content"><LocalizedText zh="跳至正文" en="Skip to content" /></a>
     <Header />
     <slot />
     <Footer />
     <script is:inline>
+      const languageButtons = document.querySelectorAll('[data-site-language]');
+      const setSiteLanguage = (language) => {
+        document.documentElement.dataset.siteLang = language;
+        document.documentElement.lang = language === 'en' ? 'en' : 'zh-CN';
+        languageButtons.forEach((item) => {
+          item.setAttribute('aria-pressed', String(item.getAttribute('data-site-language') === language));
+        });
+        const title = document.querySelector('title');
+        if (title) title.textContent = title.getAttribute(`data-${language}`) || title.textContent;
+        const description = document.querySelector('meta[name="description"]');
+        if (description) description.setAttribute('content', description.getAttribute(`data-${language}`) || '');
+        document.querySelectorAll('[data-label-zh]').forEach((item) => {
+          item.setAttribute('aria-label', item.getAttribute(`data-label-${language}`) || '');
+        });
+      };
+      setSiteLanguage(document.documentElement.dataset.siteLang === 'en' ? 'en' : 'zh');
+      languageButtons.forEach((item) => item.addEventListener('click', () => {
+        const language = item.getAttribute('data-site-language');
+        setSiteLanguage(language);
+        try { localStorage.setItem('kty578-language', language); } catch {}
+      }));
+
       const button = document.getElementById('theme-toggle');
       const media = window.matchMedia('(prefers-color-scheme: dark)');
       const isDark = () => document.documentElement.dataset.theme === 'dark' ||

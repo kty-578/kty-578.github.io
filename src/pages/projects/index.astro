@@ -1,20 +1,21 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectEntry from '../../components/ProjectEntry.astro';
+import LocalizedText from '../../components/LocalizedText.astro';
 import { getPublishedProjects } from '../../lib/content';
 
 const projects = await getPublishedProjects();
 ---
 
-<BaseLayout title="Projects" description="KTY578 的个人项目。">
+<BaseLayout title="项目" titleEn="Projects" description="KTY578 的个人项目。" descriptionEn="Personal projects by KTY578.">
   <main id="main-content" class="shell listing-page">
     <header class="listing-header">
-      <p class="eyebrow">03 / Selected work</p>
-      <h1 lang="en">Projects</h1>
-      <p>围绕阅读、研究与制作展开的项目。</p>
+      <p class="eyebrow"><LocalizedText zh="03 / 项目" en="03 / Selected work" /></p>
+      <h1><LocalizedText zh="项目" en="Projects" /></h1>
+      <p><LocalizedText zh="围绕阅读、研究与制作展开的项目。" en="Projects in reading, research, and making." /></p>
     </header>
     <div class="projects-list">
-      {projects.length > 0 ? projects.map((project) => <ProjectEntry project={project} headingLevel={2} />) : <p class="empty-state empty-state--large">项目即将从这里开始。</p>}
+      {projects.length > 0 ? projects.map((project) => <ProjectEntry project={project} headingLevel={2} />) : <p class="empty-state empty-state--large"><LocalizedText zh="项目即将从这里开始。" en="Projects will appear here soon." /></p>}
     </div>
   </main>
 </BaseLayout>

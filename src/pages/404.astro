@@ -1,12 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import LocalizedText from '../components/LocalizedText.astro';
 ---
 
-<BaseLayout title="页面未找到" description="这个地址没有对应的页面。" noindex>
+<BaseLayout title="页面未找到" titleEn="Page not found" description="这个地址没有对应的页面。" descriptionEn="No page exists at this address." noindex>
   <main id="main-content" class="shell not-found">
-    <p class="eyebrow">404 / Page not found</p>
-    <h1>页面未找到。</h1>
-    <p>这个地址没有对应的页面。你可以从首页继续阅读。</p>
-    <div class="not-found__links"><a href="/">返回首页 ↗</a><a href="/writing/">Writing ↗</a><a href="/notes/">Notes ↗</a><a href="/projects/">Projects ↗</a></div>
+    <p class="eyebrow"><LocalizedText zh="404 / 页面未找到" en="404 / Page not found" /></p>
+    <h1><LocalizedText zh="页面未找到。" en="Page not found." /></h1>
+    <p><LocalizedText zh="这个地址没有对应的页面。你可以从首页继续阅读。" en="There is no page at this address. You can continue reading from the home page." /></p>
+    <div class="not-found__links"><a href="/"><LocalizedText zh="返回首页" en="Home" /> ↗</a><a href="/writing/"><LocalizedText zh="文章" en="Writing" /> ↗</a><a href="/notes/"><LocalizedText zh="随笔" en="Notes" /> ↗</a><a href="/projects/"><LocalizedText zh="项目" en="Projects" /> ↗</a></div>
   </main>
 </BaseLayout>

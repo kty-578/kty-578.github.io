@@ -20,6 +20,9 @@ a:hover { color: var(--accent); }
 a:focus-visible,
 button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
 button { font: inherit; }
+.lang-en { display: none; }
+html[data-site-lang="en"] .lang-zh { display: none; }
+html[data-site-lang="en"] .lang-en { display: revert; }
 
 .shell { width: min(100% - 3.5rem, 70rem); margin-inline: auto; }
 .skip-link { position: absolute; top: -5rem; left: 1rem; z-index: 10; padding: .55rem .8rem; background: var(--text); color: var(--bg); }
@@ -32,6 +35,11 @@ button { font: inherit; }
 .main-nav a { font-size: .84rem; letter-spacing: .01em; color: var(--muted); text-decoration: none; border-bottom: 1px solid transparent; padding-block: .4rem; }
 .main-nav a:hover,
 .main-nav a.is-current { color: var(--text); border-bottom-color: var(--accent); }
+.language-switch { display: inline-flex; align-items: center; gap: .22rem; color: var(--muted); white-space: nowrap; }
+.language-switch button { padding: .4rem .12rem; border: 0; background: transparent; color: var(--muted); font-size: .72rem; cursor: pointer; }
+.language-switch button:hover,
+.language-switch button[aria-pressed="true"] { color: var(--text); }
+.language-switch button[aria-pressed="true"] { font-weight: 700; }
 .theme-toggle { padding: .42rem .7rem; border: 1px solid var(--border); border-radius: 999px; background: transparent; color: var(--muted); font-size: .72rem; white-space: nowrap; cursor: pointer; }
 .theme-toggle:hover { color: var(--text); border-color: var(--accent); }
 
@@ -44,7 +52,7 @@ button { font: inherit; }
 .eyebrow { margin: 0; color: var(--accent); font-size: .73rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
 .eyebrow-link { text-decoration: none; }
 
-.home-intro { padding-block: clamp(5rem, 10vw, 9rem) clamp(4.8rem, 8vw, 8rem); border-bottom: 1px solid var(--border); }
+.home-intro { padding-block: var(--intro-space-top) var(--intro-space-bottom); border-bottom: 1px solid var(--border); }
 .home-intro h1 { max-width: 57rem; margin: 1.9rem 0 1.6rem; font-family: var(--font-reading-zh); font-weight: 500; font-size: clamp(2.2rem, 5.3vw, 4.75rem); line-height: 1.36; letter-spacing: -.04em; }
 .home-intro h1 em { font-style: normal; color: var(--accent); }
 .home-intro__description { max-width: 40rem; margin: 0; color: var(--muted); font-family: var(--font-reading-zh); font-size: clamp(1rem, 1.55vw, 1.22rem); line-height: 1.95; }
@@ -52,7 +60,7 @@ button { font: inherit; }
 .home-section { padding-top: 4.1rem; }
 .section-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding-bottom: 1.1rem; border-bottom: 1px solid var(--border); }
 .section-heading > div { display: flex; align-items: baseline; gap: 1rem; }
-.section-heading h2 { display: inline; margin: 0; font-family: var(--font-reading-en); font-weight: 500; font-size: 1.65rem; letter-spacing: -.025em; }
+.section-heading h2 { display: inline; margin: 0; font-family: var(--font-reading-zh); font-weight: 500; font-size: 1.65rem; letter-spacing: -.025em; }
 .section-mark { color: var(--accent); font-family: var(--font-reading-en); font-size: 1.1rem; line-height: 1; }
 .section-heading > a { color: var(--muted); font-size: .76rem; text-decoration: none; white-space: nowrap; }
 .section-heading > a:hover { color: var(--accent); }
@@ -75,9 +83,9 @@ button { font: inherit; }
 .project-entry p { margin: .35rem 0 0; color: var(--muted); font-size: .9rem; }
 .project-entry__period { color: var(--muted); font-size: .8rem; white-space: nowrap; }
 
-.listing-page { padding-top: clamp(4rem, 8vw, 7.2rem); min-height: 50vh; }
-.listing-header { padding-bottom: 3.4rem; border-bottom: 1px solid var(--border); }
-.listing-header h1 { margin: 1.2rem 0 .7rem; font-family: var(--font-reading-en); font-size: clamp(3.2rem, 7vw, 6rem); font-weight: 500; line-height: 1.1; letter-spacing: -.065em; }
+.listing-page { min-height: 50vh; }
+.listing-header { padding-block: var(--intro-space-top) var(--intro-space-bottom); border-bottom: 1px solid var(--border); }
+.listing-header h1 { margin: 1.2rem 0 .7rem; font-family: var(--font-reading-zh); font-size: clamp(3.2rem, 7vw, 6rem); font-weight: 500; line-height: 1.1; letter-spacing: -.065em; }
 .listing-header > p:last-child { margin: 0; color: var(--muted); font-family: var(--font-reading-zh); font-size: 1.12rem; }
 .listing-list li { border-bottom: 1px solid var(--border); }
 .listing-list article { display: flex; justify-content: space-between; gap: 2rem; padding-block: 1.8rem; }
@@ -92,6 +100,14 @@ button { font: inherit; }
 .not-found > p:not(.eyebrow) { color: var(--muted); }
 .not-found__links { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 2.5rem; }
 .not-found__links a { text-decoration: none; border-bottom: 1px solid var(--accent); }
+
+html[data-site-lang="en"] .home-intro h1,
+html[data-site-lang="en"] .home-intro__description,
+html[data-site-lang="en"] .section-heading h2,
+html[data-site-lang="en"] .empty-state,
+html[data-site-lang="en"] .listing-header h1,
+html[data-site-lang="en"] .listing-header > p:last-child { font-family: var(--font-reading-en); }
+html[data-site-lang="en"] .home-intro__description { max-width: 57rem; }
 
 @media (max-width: 760px) {
   .shell { width: min(100% - 2.25rem, 70rem); }

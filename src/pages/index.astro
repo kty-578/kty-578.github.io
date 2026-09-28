@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectEntry from '../components/ProjectEntry.astro';
+import LocalizedText from '../components/LocalizedText.astro';
 import { dateValue, formatDate, getPublishedNotes, getPublishedProjects, getPublishedWriting } from '../lib/content';
 
 const [writing, notes, projects] = await Promise.all([
@@ -10,50 +11,50 @@ const [writing, notes, projects] = await Promise.all([
 ]);
 ---
 
-<BaseLayout title="KTY578" description="KTY578 的个人网站，记录写作、阅读、研究与项目。">
+<BaseLayout title="KTY578" description="KTY578 的个人网站，记录写作、阅读、研究与项目。" descriptionEn="KTY578's personal website for writing, reading, research, and projects.">
   <main id="main-content" class="shell home">
     <section class="home-intro" aria-labelledby="home-title">
-      <p class="eyebrow" lang="en">A personal place for thought and making</p>
-      <h1 id="home-title">写作、阅读、研究。</h1>
-      <p class="home-intro__description">这里收藏随笔、笔记与项目。文字可以慢慢写，想法也可以慢慢生长。</p>
+      <p class="eyebrow"><LocalizedText zh="写作与制作的个人空间" en="A personal place for thought and making" /></p>
+      <h1 id="home-title"><LocalizedText zh="写作、阅读、研究。" en="Writing, Reading, Research." /></h1>
+      <p class="home-intro__description"><LocalizedText zh="这里收藏文章、随笔与项目。文字可以慢慢写，想法也可以慢慢生长。" en="A home for articles, notes, and projects. Words and ideas can grow at their own pace." /></p>
     </section>
 
     <div class="home-grid">
       <section class="home-section" aria-labelledby="writing-heading">
         <div class="section-heading">
-          <div><span class="section-mark" aria-hidden="true">§</span><h2 id="writing-heading" lang="en">Writing</h2></div>
-          <a href="/writing/" aria-label="查看全部 Writing">全部 <span aria-hidden="true">↗</span></a>
+          <div><span class="section-mark" aria-hidden="true">§</span><h2 id="writing-heading"><LocalizedText zh="文章" en="Writing" /></h2></div>
+          <a href="/writing/" aria-label="查看全部文章" data-label-zh="查看全部文章" data-label-en="View all writing"><LocalizedText zh="全部" en="All" /> <span aria-hidden="true">↗</span></a>
         </div>
         {writing.length > 0 ? (
           <ol class="entry-list">
             {writing.slice(0, 4).map((entry) => (
-              <li><a href={`/writing/${entry.id}/`}><span>{entry.data.title}</span><time datetime={dateValue(entry.data.date)}>{formatDate(entry.data.date, entry.data.lang)}</time></a></li>
+              <li><a href={`/writing/${entry.id}/`}><span lang={entry.data.lang}>{entry.data.title}</span><time datetime={dateValue(entry.data.date)}><LocalizedText zh={formatDate(entry.data.date, 'zh-CN')} en={formatDate(entry.data.date, 'en')} /></time></a></li>
             ))}
           </ol>
-        ) : <p class="empty-state">文章即将从这里开始。</p>}
+        ) : <p class="empty-state"><LocalizedText zh="文章即将从这里开始。" en="Articles will appear here soon." /></p>}
       </section>
 
       <section class="home-section" aria-labelledby="notes-heading">
         <div class="section-heading">
-          <div><span class="section-mark" aria-hidden="true">§</span><h2 id="notes-heading" lang="en">Notes</h2></div>
-          <a href="/notes/" aria-label="查看全部 Notes">全部 <span aria-hidden="true">↗</span></a>
+          <div><span class="section-mark" aria-hidden="true">§</span><h2 id="notes-heading"><LocalizedText zh="随笔" en="Notes" /></h2></div>
+          <a href="/notes/" aria-label="查看全部随笔" data-label-zh="查看全部随笔" data-label-en="View all notes"><LocalizedText zh="全部" en="All" /> <span aria-hidden="true">↗</span></a>
         </div>
         {notes.length > 0 ? (
           <ol class="entry-list">
             {notes.slice(0, 4).map((entry) => (
-              <li><a href={`/notes/${entry.id}/`}><span>{entry.data.title}</span><time datetime={dateValue(entry.data.date)}>{formatDate(entry.data.date, entry.data.lang)}</time></a></li>
+              <li><a href={`/notes/${entry.id}/`}><span lang={entry.data.lang}>{entry.data.title}</span><time datetime={dateValue(entry.data.date)}><LocalizedText zh={formatDate(entry.data.date, 'zh-CN')} en={formatDate(entry.data.date, 'en')} /></time></a></li>
             ))}
           </ol>
-        ) : <p class="empty-state">笔记即将从这里开始。</p>}
+        ) : <p class="empty-state"><LocalizedText zh="随笔即将从这里开始。" en="Notes will appear here soon." /></p>}
       </section>
     </div>
 
     <section class="home-section home-projects" aria-labelledby="projects-heading">
       <div class="section-heading">
-        <div><span class="section-mark" aria-hidden="true">§</span><h2 id="projects-heading" lang="en">Projects</h2></div>
-        <a href="/projects/" aria-label="查看全部 Projects">全部 <span aria-hidden="true">↗</span></a>
+        <div><span class="section-mark" aria-hidden="true">§</span><h2 id="projects-heading"><LocalizedText zh="项目" en="Projects" /></h2></div>
+        <a href="/projects/" aria-label="查看全部项目" data-label-zh="查看全部项目" data-label-en="View all projects"><LocalizedText zh="全部" en="All" /> <span aria-hidden="true">↗</span></a>
       </div>
-      {projects.length > 0 ? projects.map((project) => <ProjectEntry project={project} />) : <p class="empty-state">项目即将从这里开始。</p>}
+      {projects.length > 0 ? projects.map((project) => <ProjectEntry project={project} />) : <p class="empty-state"><LocalizedText zh="项目即将从这里开始。" en="Projects will appear here soon." /></p>}
     </section>
 
   </main>

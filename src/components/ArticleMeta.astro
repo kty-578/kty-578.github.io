@@ -1,16 +1,16 @@
 ---
 import { dateValue, formatDate } from '../lib/content';
+import LocalizedText from './LocalizedText.astro';
 
 interface Props {
   date: Date;
   updatedDate?: Date;
-  lang: 'zh-CN' | 'en';
 }
 
-const { date, updatedDate, lang } = Astro.props;
+const { date, updatedDate } = Astro.props;
 ---
 
 <div class="article-meta">
-  <time datetime={dateValue(date)}>{formatDate(date, lang)}</time>
-  {updatedDate && <span class="article-meta__updated">{lang === 'zh-CN' ? '更新于' : 'Updated'} <time datetime={dateValue(updatedDate)}>{formatDate(updatedDate, lang)}</time></span>}
+  <time datetime={dateValue(date)}><LocalizedText zh={formatDate(date, 'zh-CN')} en={formatDate(date, 'en')} /></time>
+  {updatedDate && <span class="article-meta__updated"><LocalizedText zh="更新于" en="Updated" /> <time datetime={dateValue(updatedDate)}><LocalizedText zh={formatDate(updatedDate, 'zh-CN')} en={formatDate(updatedDate, 'en')} /></time></span>}
 </div>

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import ArticleMeta from '../components/ArticleMeta.astro';
+import LocalizedText from '../components/LocalizedText.astro';
 
 interface Props {
   title: string;
@@ -14,21 +15,22 @@ interface Props {
 
 const { title, description, section, lang, date, updatedDate, period } = Astro.props;
 const sectionHref = `/${section.toLowerCase()}/`;
+const sectionZh = { Writing: '文章', Notes: '随笔', Projects: '项目' }[section];
 ---
 
-<BaseLayout title={title} description={description} lang={lang} type="article">
+<BaseLayout title={title} description={description} type="article">
   <main id="main-content" class="shell article-shell">
     <article class="article">
       <header class="article-header">
-        <a class="eyebrow eyebrow-link" href={sectionHref} lang="en">{section} <span aria-hidden="true">↗</span></a>
-        <h1>{title}</h1>
-        {date && <ArticleMeta date={date} updatedDate={updatedDate} lang={lang} />}
+        <a class="eyebrow eyebrow-link" href={sectionHref}><LocalizedText zh={sectionZh} en={section} /> <span aria-hidden="true">↗</span></a>
+        <h1 lang={lang}>{title}</h1>
+        {date && <ArticleMeta date={date} updatedDate={updatedDate} />}
         {period && <p class="article-meta">{period}</p>}
       </header>
-      <div class="prose"><slot /></div>
+      <div class="prose" lang={lang}><slot /></div>
       <footer class="article-end">
         <span aria-hidden="true">⁂</span>
-        <a href={sectionHref}>{lang === 'zh-CN' ? '返回列表' : 'Back to list'}</a>
+        <a href={sectionHref}><LocalizedText zh="返回列表" en="Back to list" /></a>
       </footer>
     </article>
   </main>

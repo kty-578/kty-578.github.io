@@ -9,7 +9,7 @@ interface Props {
 const { project, headingLevel = 3 } = Astro.props;
 ---
 
-<article class="project-entry">
+<article class="project-entry" lang={project.data.lang}>
   <div class="project-entry__main">
     {headingLevel === 2 ? (
       <h2><a href={`/projects/${project.id}/`}>{project.data.title}<span aria-hidden="true"> ↗</span></a></h2>
