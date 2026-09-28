@@ -53,7 +53,7 @@ button { font: inherit; }
 .section-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding-bottom: 1.1rem; border-bottom: 1px solid var(--border); }
 .section-heading > div { display: flex; align-items: baseline; gap: 1rem; }
 .section-heading h2 { display: inline; margin: 0; font-family: var(--font-reading-en); font-weight: 500; font-size: 1.65rem; letter-spacing: -.025em; }
-.section-number { color: var(--accent); font-size: .72rem; letter-spacing: .08em; }
+.section-mark { color: var(--accent); font-family: var(--font-reading-en); font-size: 1.1rem; line-height: 1; }
 .section-heading > a { color: var(--muted); font-size: .76rem; text-decoration: none; white-space: nowrap; }
 .section-heading > a:hover { color: var(--accent); }
 .entry-list,
@@ -74,9 +74,6 @@ button { font: inherit; }
 .project-entry h3 a span { color: var(--accent); font-family: var(--font-ui); font-size: .88rem; }
 .project-entry p { margin: .35rem 0 0; color: var(--muted); font-size: .9rem; }
 .project-entry__period { color: var(--muted); font-size: .8rem; white-space: nowrap; }
-.home-outro { display: flex; align-items: center; gap: 1.25rem; margin-top: 5rem; color: var(--accent); }
-.home-outro > span { font-family: var(--font-reading-en); font-size: 1.55rem; }
-.home-outro a { font-family: var(--font-reading-zh); font-size: 1.1rem; text-decoration: none; }
 
 .listing-page { padding-top: clamp(4rem, 8vw, 7.2rem); min-height: 50vh; }
 .listing-header { padding-bottom: 3.4rem; border-bottom: 1px solid var(--border); }
