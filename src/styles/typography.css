@@ -1,8 +1,6 @@
 .article-shell { padding-top: clamp(4rem, 8vw, 7rem); }
 .about-page { padding-top: 0; }
 .article { max-width: 44rem; margin-inline: auto; }
-.about-article { max-width: none; margin-inline: 0; }
-.about-article .prose { max-width: 44rem; }
 .article-header { padding-bottom: 2.9rem; border-bottom: 1px solid var(--border); }
 .article-header h1 { margin: 1.1rem 0 1.4rem; font-family: var(--font-reading-zh); font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 500; line-height: 1.4; letter-spacing: -.035em; }
 .article-header h1[lang="en"] { font-family: var(--font-reading-en); }
