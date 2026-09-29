@@ -5,5 +5,6 @@ export default defineConfig({
   site: 'https://kty578.com',
   output: 'static',
   trailingSlash: 'always',
+  build: { inlineStylesheets: 'always' },
   integrations: [sitemap({ filter: (page) => !page.endsWith('/404/') })],
 });
