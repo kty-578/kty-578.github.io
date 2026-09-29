@@ -1,6 +1,6 @@
 ---
 title: Scriptorium
-description: 面向历史文献的本地 OCR 工作空间。
+description: 面向非标准历史文献的本地 OCR 工具。
 period: 2026 —
 lang: zh-CN
 draft: false
